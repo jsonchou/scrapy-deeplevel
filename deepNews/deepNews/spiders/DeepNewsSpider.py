@@ -5,7 +5,7 @@ from deepNews.items import DeepnewsItem
 
 
 class DeepNewsSpider(scrapy.Spider):
-    name = 'sina'
+    name = 'DeepNewsSpider'
     allowed_domains = ['sina.com.cn']
     start_urls = ['https://news.sina.com.cn/guide/']
 
@@ -38,7 +38,7 @@ class DeepNewsSpider(scrapy.Spider):
                 item["parentTitle"] = parentTitle[i]
                 item["parentUrls"] = parentUrls[i]
 
-                if_belong = subUrls[j].startwith(item['parentUrls'])
+                if_belong = subUrls[j].startswith(item['parentUrls'])
 
                 if(if_belong):
                     subFilename = parentFilename+'/'+subTitle[j]
@@ -63,7 +63,7 @@ class DeepNewsSpider(scrapy.Spider):
         items = []
         for i in range(0, len(sonUrls)):
             if_belong = sonUrls[i].endswith(
-                '.shtml') and sonUrls[i].startwith(meta_1['parentUrls'])
+                '.shtml') and sonUrls[i].startswith(meta_1['parentUrls'])
 
             if(if_belong):
                 item = DeepnewsItem()
