@@ -9,12 +9,11 @@ import scrapy
 
 
 class DeepnewsItem(scrapy.Item):
-    # define the fields for your item here like:
-    # 大类
+    # 大类的标题和url
     parentTitle = scrapy.Field()
     parentUrls = scrapy.Field()
 
-    # 小类
+    # 小类的标题和子url
     subTitle = scrapy.Field()
     subUrls = scrapy.Field()
 
@@ -24,7 +23,6 @@ class DeepnewsItem(scrapy.Item):
     # 小类下的子链接
     sonUrls = scrapy.Field()
 
-    # 文章标题内容
+    # 文章标题和内容
     title = scrapy.Field()
     content = scrapy.Field()
-    pass

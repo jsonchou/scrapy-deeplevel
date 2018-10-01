@@ -82,14 +82,14 @@ class DeepNewsSpider(scrapy.Spider):
     def detail_parse(self, response):
         item = response.meta['meta_2']
 
-        content = ''
-        title = response.xpath("//h1[@class='main-title']/text()")
+        content = ""
+        title = response.xpath('//h1[@id="main_title"]/text()')
         
         content_list = response.xpath(
-            "//div[@id='article_content']/p/text()").extract()
+            '//div[@id="artibody"]/p/text()').extract()
 
-        for prow in content_list:
-            content += prow
+        for content_one in content_list:
+            content += content_one
 
         item['title'] = title
         item['content'] = content
