@@ -83,10 +83,13 @@ class DeepNewsSpider(scrapy.Spider):
         item = response.meta['meta_2']
 
         content = ''
-        title = response.xpath("//h1[@class='main-title']/text()")
-        
-        content_list = response.xpath(
-            "//div[@id='article_content']/p/text()").extract()
+        # title = response.xpath("/html/head/title/text()")
+        title = response.xpath('/html/head/meta[@property="og:title"]/@content').extract()
+
+        if not title:
+            title = response.xpath("//h1[@id='artibodyTitle' or @class='main-title' or id='main_title' ]/text()").extract()
+
+        content_list = response.xpath("//div[@id='artibody' or @id='article_content']/p/text()").extract()
 
         for prow in content_list:
             content += prow
